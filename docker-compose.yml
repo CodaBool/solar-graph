@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  sense:
+    container_name: sense
+    build:
+      context: ./sense-collector
+    depends_on:
+      - influxdb
+    env_file:
+      - ./.env
+    # environment:
+    #   # use the gen.sh to generate environment and place in .env
+    #   TZ: America/New_York
+    #   SENSE_COLLECTOR_INFLUXDB_URL: http://influxdb:8086/write?db=test
+    #   SENSE_COLLECTOR_INFLUXDB_USERNAME: test
+    #   SENSE_COLLECTOR_PERF_INTERVAL: 60
+    #   SENSE_COLLECTOR_DISABLE_HEALTH_CHECK: true
+  influxdb:
+    image: influxdb
+    healthcheck:
+      test: ["CMD", "curl", "localhost:8086"]
+    container_name: influxdb
+    ports:
+      - 8086:8086
+    volumes:
+      - ./config:/etc/influxdb2
+      - ./db:/var/lib/influxdb2
