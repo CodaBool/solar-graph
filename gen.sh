@@ -10,7 +10,14 @@
 
 collector_type="sense-collector"
 
-# INSERT LINES FROM .ENV
+# FILL OUT THESE VARIABLES FROM INFLUXDB OR YOUR SENSE LOGIN
+
+# influxdb_password=
+# influxdb_url=http://localhost:8086?db=codabool
+# influxdb_username=
+# sense_username=
+# sense_password=
+
 
 echo_bold=$(tput -T xterm bold)
 echo_color_sense=$(echo -e "\e[3$(( RANDOM * 6 / 32767 + 1 ))m")
